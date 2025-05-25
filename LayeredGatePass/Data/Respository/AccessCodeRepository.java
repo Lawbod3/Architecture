@@ -11,6 +11,9 @@ import java.util.Optional;
     public interface AccessCodeRepository {
         long count();
         List<AccessCode> findByCreationDate(String date);
+        List<AccessCode> findByExpirationDate(String date);
+        List<AccessCode> findByUseDate(String date);
+        List<AccessCode> findAllActiveToken();
         List<AccessCode> findAll();
         List<AccessCode> findById(long id);
         Optional<AccessCode> findByToken(String token);

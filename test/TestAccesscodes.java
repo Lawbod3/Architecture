@@ -66,9 +66,15 @@ public class TestAccesscodes {
     }
 
     @Test
-    public void testAccessCodsCanBeFindFindByDate(){
+    public void testAccessCodsCanBeFindFindByCreationDate(){
         AccessCode result = accessCodes.save(resident, accessCode );
         List<AccessCode> all = accessCodes.findByCreationDate("05/25/2025");
+        assertTrue(all.contains(result));
+    }
+    @Test
+    public void testAccessCodsCanBeFindByExpirationDate(){
+        AccessCode result = accessCodes.save(resident, accessCode );
+        List<AccessCode> all = accessCodes.findByExpirationDate("05/28/2025");
         assertTrue(all.contains(result));
     }
 

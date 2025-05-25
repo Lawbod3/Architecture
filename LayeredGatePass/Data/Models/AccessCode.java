@@ -7,7 +7,7 @@ public class AccessCode {
     private String token;
     private long id;
     private LocalDate creationDate;
-    private LocalDate tenderDate;
+    private LocalDate usedDate;
     private LocalDate expirationDate;
     private boolean active;
     private Visitors visitor;
@@ -26,6 +26,7 @@ public class AccessCode {
     }
     public void setCreationDate() {
         this.creationDate = LocalDate.now();
+        this.setExpirationDate();
     }
     public String getCreationDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -39,11 +40,11 @@ public class AccessCode {
         return this.expirationDate.format(formatter);
     }
     private void setTenderDate() {
-        this.tenderDate = LocalDate.now();
+        this.usedDate = LocalDate.now();
     }
-    public String getTenderDate() {
+    public String getUsedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        return this.tenderDate.format(formatter);
+        return this.usedDate.format(formatter);
     }
 
     public boolean isActive() {

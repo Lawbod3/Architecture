@@ -44,6 +44,34 @@ public class AccessCodes implements AccessCodeRepository {
     }
 
     @Override
+    public List<AccessCode> findByExpirationDate(String date) {
+        List<AccessCode> result = new ArrayList<>();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate localDate = LocalDate.parse(date, formatter);
+            for(AccessCode accessCode : accessCodes) {
+                LocalDate expirationDate = LocalDate.parse(accessCode.getExpirationDate(), formatter);
+                if(expirationDate.equals(localDate)) result.add(accessCode);
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public List<AccessCode> findByUseDate(String date) {
+        return List.of();
+    }
+
+    @Override
+    public List<AccessCode> findAllActiveToken() {
+        return List.of();
+    }
+
+    @Override
     public List<AccessCode> findAll() {
         List<AccessCode> allAccessCode = new ArrayList<>();
         allAccessCode.addAll(accessCodes);
