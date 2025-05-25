@@ -6,6 +6,7 @@ import Data.Respository.Residents;
 import Dtos.Requests.LoginRequest;
 import Dtos.Requests.RegisterResidentRequest;
 import Dtos.Responses.RegisterResidentResponse;
+import Exceptions.ServiceExceptions;
 import Utils.Mapper;
 
 import java.util.Optional;
@@ -19,14 +20,16 @@ public class RequestServiceImpl implements ResidentsServices{
     
 
     @Override
-    public RegisterResidentResponse register(RegisterResidentRequest resident) {
-       Resident newResident = residentRepository.save(map(resident));
-        RegisterResidentResponse result = map(newResident);
-        return result;
+    public RegisterResidentResponse register(RegisterResidentRequest request) {
+        ServiceExceptions.raiseOn(request);
+       Resident newResident = residentRepository.save(map(request));
+        return map(newResident);
+
     }
 
     @Override
-    public Optional<Resident> login(LoginRequest loginRequest) {
-        return Mapper.mapLogin(loginRequest);
+    public Optional<Resident> login(LoginRequest request) {
+        ServiceExceptions.raiseOn(request);
+        return Mapper.mapLogin(request);
     }
 }

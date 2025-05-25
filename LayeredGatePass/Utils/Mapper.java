@@ -33,8 +33,8 @@ public class Mapper {
 
     public static Optional<Resident> mapLogin(LoginRequest loginRequest) {
         Residents residents = new Residents();
-        Resident myResident = residents.findById(loginRequest.getId()).get();
-        if(loginRequest.getEmail().equals(myResident.getEmail()))return Optional.of(myResident);
+        Optional<Resident> myResident = residents.findById(loginRequest.getId());
+        if(myResident.isPresent() && loginRequest.getEmail().equals(myResident.get().getEmail()))return myResident;
         return  Optional.empty();
     }
 
