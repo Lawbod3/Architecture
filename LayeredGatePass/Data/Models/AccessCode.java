@@ -1,20 +1,20 @@
 package Data.Models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class AccessCode {
-    private long accessCode;
+    private String token;
     private long id;
-    private LocalDateTime creationDate;
+    private LocalDate creationDate;
     private LocalDate expirationDate;
     private boolean active;
+    private Visitors visitor;
 
-    public void setAccessCode(long accessCode) {
-        this.accessCode = accessCode;
+    public void setToken(String token) {
+        this.token = token;
     }
-    public long getAccessCode() {
-        return accessCode;
+    public String getToken() {
+        return token;
     }
     public void setId(long id) {
         this.id = id;
@@ -22,17 +22,27 @@ public class AccessCode {
     public long getId() {
         return id;
     }
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate() {
+        this.creationDate = LocalDate.now();
     }
-    public LocalDateTime getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
-    public void setExpirationDate() {
-        this.expirationDate = this.creationDate.toLocalDate().plusDays(3);
+    private void setExpirationDate() {
+        this.expirationDate = this.creationDate.plusDays(3);
     }
     public LocalDate getExpirationDate() {
         return expirationDate;
+    }
+    public boolean isActive() {
+        return active;
+    }
+    public void isUsed(Visitors visitor) {
+        this.active = false;
+        this.visitor = visitor;
+    }
+    public Visitors getVisitor() {
+        return visitor;
     }
 
 }
