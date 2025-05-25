@@ -10,9 +10,10 @@ import java.util.Optional;
 
     public interface AccessCodeRepository {
         long count();
-        List<AccessCode> findByDate(String date);
+        List<AccessCode> findByCreationDate(String date);
         List<AccessCode> findAll();
-        Optional<AccessCode> findById(long id);
+        List<AccessCode> findById(long id);
+        Optional<AccessCode> findByToken(String token);
         AccessCode save(Resident resident, AccessCode accessCode);
-
-}
+        List<AccessCode> findByResident(Resident resident);
+    }
